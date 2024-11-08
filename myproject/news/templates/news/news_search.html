@@ -1,0 +1,17 @@
+{% extends "news/default.html" %}
+
+{% block content %}
+<h2>Поиск новостей</h2>
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Поиск</button>
+</form>
+<ul>
+    {% for item in filter.qs %}
+    <li>
+        <h3><a href="{% url 'news_detail' item.pk %}">{{ item.title }}</a></h3>
+        <p>{{ item.created_at|date:"d.m.Y" }} - {{ item.text|slice:":20" }}...</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
